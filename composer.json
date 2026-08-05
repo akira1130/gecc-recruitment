@@ -7,5 +7,10 @@
     },
     "engines": {
         "php": "8.2"
+    },
+    "require-dev": {
+        "ext-mysqli": "*",
+        "ext-pdo": "*",
+        "ext-curl": "*"
     }
 }
