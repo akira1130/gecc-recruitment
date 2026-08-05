@@ -3,6 +3,9 @@
     "description": "GECC Recruitment Application System",
     "require": {
         "phpmailer/phpmailer": "^6.8",
-        "php": "^7.4 || ^8.0"
+        "php": ">=8.0"
+    },
+    "engines": {
+        "php": "8.2"
     }
 }
