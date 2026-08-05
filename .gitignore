@@ -1,0 +1,31 @@
+# Environment variables (NEVER commit this!)
+.env
+.env.local
+.env.*.local
+
+# Dependencies
+vendor/
+node_modules/
+
+# Logs
+logs/
+*.log
+
+# Uploads
+uploads/
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Misc
+.cache
+tmp/

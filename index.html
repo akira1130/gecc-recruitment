@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GECC - Global English Call Center Inc. Premium English teaching platform for Korean learners. Join our community of passionate teachers transforming lives through English education.">
+    <meta name="keywords" content="English teaching, ESL, Korean learners, teaching jobs, remote teaching, English education">
+    <meta name="author" content="Global English Call Center Inc.">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="GECC - Global English Call Center Inc.">
+    <meta property="og:description" content="Teach English to motivated Korean learners. Flexible hours, competitive pay, and professional development.">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#6366f1">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <title>GECC - Global English Call Center Inc. | Become an Inspiring English Teacher</title>
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Skip navigation for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen" role="status" aria-label="Loading GECC website">
+        <div class="loading-container">
+            <div class="loading-logo" aria-hidden="true">GECC</div>
+            <div class="loading-text" aria-live="polite">
+                <span class="letter">G</span><span class="letter">l</span><span class="letter">o</span><span class="letter">b</span><span class="letter">a</span><span class="letter">l</span><span class="letter"> </span>
+                <span class="letter">E</span><span class="letter">n</span><span class="letter">g</span><span class="letter">l</span><span class="letter">i</span><span class="letter">s</span><span class="letter">h</span>
+            </div>
+            <div class="loading-bars" aria-hidden="true">
+                <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+            </div>
+            <div class="loading-progress" aria-hidden="true">
+                <div class="progress-line"></div>
+            </div>
+            <div class="loading-percentage" aria-live="polite">0%</div>
+        </div>
+        <div class="loading-background" aria-hidden="true">
+            <div class="blob blob-1"></div><div class="blob blob-2"></div><div class="blob blob-3"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <a href="#home" class="logo" aria-label="GECC Home">GECC</a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navMenu" type="button">
+                <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact" class="nav-cta">Get Started</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main-content">
+
+    <!-- Hero Section -->
+    <section id="home" class="hero" aria-label="Welcome to GECC">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-title-with-image">
+                    <h1>
+                        <span class="letter">B</span><span class="letter">e</span><span class="letter">g</span><span class="letter">i</span><span class="letter">n</span><span class="letter"> </span>
+                        <span class="letter">Y</span><span class="letter">o</span><span class="letter">u</span><span class="letter">r</span><br>
+                        <span class="letter">J</span><span class="letter">o</span><span class="letter">u</span><span class="letter">r</span><span class="letter">n</span><span class="letter">e</span><span class="letter">y</span><br>
+                        <span class="letter">a</span><span class="letter">s</span><span class="letter"> </span><span class="letter">a</span><span class="letter">n</span><span class="letter"> </span>
+                        <span class="letter">I</span><span class="letter">n</span><span class="letter">s</span><span class="letter">p</span><span class="letter">i</span><span class="letter">r</span><span class="letter">i</span><span class="letter">n</span><span class="letter">g</span><br>
+                        <span class="letter">E</span><span class="letter">n</span><span class="letter">g</span><span class="letter">l</span><span class="letter">i</span><span class="letter">s</span><span class="letter">h</span><span class="letter"> </span>
+                        <span class="letter">T</span><span class="letter">e</span><span class="letter">a</span><span class="letter">c</span><span class="letter">h</span><span class="letter">e</span><span class="letter">r</span>
+                    </h1>
+                    <div class="hero-image">
+                        <div class="placeholder-image">
+                            <img src="1.jpg" alt="GECC Teaching Platform" loading="eager">
+                        </div>
+                    </div>
+                </div>
+                <p class="hero-subtitle">Join thousands of educators transforming lives through quality English instruction. Work with motivated Korean learners, flexible hours, and competitive compensation.</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">Start Your Application</a>
+                    <button class="btn btn-secondary" id="videoBtn" type="button">Learn More</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Modal -->
+    <div class="modal" id="videoModal" role="dialog" aria-modal="true" aria-labelledby="videoModalTitle" aria-hidden="true">
+        <div class="modal-content">
+            <button class="close" id="closeModal" type="button" aria-label="Close video">&times;</button>
+            <div class="modal-header">
+                <h2 id="videoModalTitle">How GECC Works</h2>
+            </div>
+            <div class="modal-body">
+                <iframe width="100%" height="400" src="https://www.youtube.com/embed/jNQXAC9IVRw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Lightbox Modal -->
+    <div class="modal" id="imageModal" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="modal-content image-modal-content">
+            <button class="close" id="closeImageModal" type="button" aria-label="Close image">&times;</button>
+            <div class="modal-body">
+                <img id="modalImage" src="" alt="GECC Teaching Platform" style="width: 100%; height: auto;">
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <section id="features" class="features" aria-label="Why teachers choose GECC">
+        <div class="features-container">
+            <div class="section-header">
+                <h2>Why Inspiring Teachers Choose GECC</h2>
+                <p>Perfect for fresh graduates and experienced educators alike</p>
+            </div>
+            <div class="features-grid">
+                <article class="feature-card">
+                    <div class="feature-icon" aria-hidden="true">🎯</div>
+                    <h3>Engaged & Motivated Learners</h3>
+                    <p>Teach Korean students who are genuinely invested in learning English. Experience meaningful classroom interactions with students who appreciate quality instruction.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon" aria-hidden="true">💼</div>
+                    <h3>Complete Teaching Support</h3>
+                    <p>Fresh graduates welcome! We provide everything—professional curriculum, lesson plans, teaching materials, and our digital platform. Perfect for starting your teaching career.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon" aria-hidden="true">🌍</div>
+                    <h3>Work From Anywhere</h3>
+                    <p>Teach from home, a café, or anywhere with internet. Flexible afternoon-evening shifts (1 PM - 10 PM) fit your lifestyle perfectly.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon" aria-hidden="true">💰</div>
+                    <h3>Competitive Compensation</h3>
+                    <p>Earn attractive hourly rates from day one. Performance bonuses and incentive programs reward your dedication and teaching excellence.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon" aria-hidden="true">📚</div>
+                    <h3>Mentorship & Professional Growth</h3>
+                    <p>Access free training, teaching certifications, and mentorship from experienced educators. Build your expertise and teaching confidence.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon" aria-hidden="true">🚀</div>
+                    <h3>Career Pathway for Growth</h3>
+                    <p>Start your teaching journey and grow into leadership roles. From fresh graduate to senior educator or team lead—your future is bright.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services" aria-label="Our teaching methodology">
+        <div class="services-container">
+            <div class="section-header">
+                <h2>Our Proven Teaching Methodology</h2>
+                <p>Specialized curriculum designed for Korean learners' success</p>
+            </div>
+            <div class="services-grid">
+                <article class="service-item">
+                    <h3>Master Natural Pronunciation</h3>
+                    <p>Our proven methodology focuses on the specific pronunciation challenges Korean speakers face. Guide your students to native-like fluency through targeted, effective techniques.</p>
+                    <a href="#services" class="service-link">Learn More <span aria-hidden="true">→</span></a>
+                </article>
+                <article class="service-item">
+                    <h3>Phrasal Verbs & Conversational Mastery</h3>
+                    <p>Teach the phrasal verbs and natural expressions that matter in real-world English. Help students communicate confidently in everyday situations.</p>
+                    <a href="#services" class="service-link">Learn More <span aria-hidden="true">→</span></a>
+                </article>
+                <article class="service-item">
+                    <h3>Build Speaking Confidence & Fluency</h3>
+                    <p>Break through the "speaking wall" many Korean learners face. Use our structured approach to develop genuine fluency and speaking confidence.</p>
+                    <a href="#services" class="service-link">Learn More <span aria-hidden="true">→</span></a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats" aria-label="Key statistics">
+        <div class="stats-container">
+            <article class="stat-item">
+                <h3><span aria-label="500 plus">500+</span></h3>
+                <p>Satisfied Instructors Worldwide</p>
+            </article>
+            <article class="stat-item">
+                <h3><span aria-label="50 thousand plus">50K+</span></h3>
+                <p>Students Learning & Growing</p>
+            </article>
+            <article class="stat-item">
+                <h3><span aria-label="98 percent">98%</span></h3>
+                <p>Instructor Satisfaction Rate</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials" aria-label="Student testimonials">
+        <div class="testimonials-container">
+            <div class="section-header">
+                <h2>Stories From Our Students</h2>
+                <p>Real testimonials from students learning English with GECC instructors</p>
+            </div>
+            <div class="testimonials-grid">
+                <article class="testimonial-card" itemscope itemtype="https://schema.org/Review">
+                    <div class="stars" role="img" aria-label="5 out of 5 stars">
+                        <span aria-hidden="true">★★★★★</span>
+                    </div>
+                    <p itemprop="reviewBody">"My teacher at GECC is amazing! The lessons are engaging and I've improved my English so much in just a few months. The platform is easy to use and the teaching methods really work. I highly recommend GECC to anyone wanting to learn English!"</p>
+                    <div class="testimonial-author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                        <strong itemprop="name">Min-jun Park</strong>
+                        <span itemprop="jobTitle">Student, South Korea</span>
+                    </div>
+                </article>
+                <article class="testimonial-card" itemscope itemtype="https://schema.org/Review">
+                    <div class="stars" role="img" aria-label="5 out of 5 stars">
+                        <span aria-hidden="true">★★★★★</span>
+                    </div>
+                    <p itemprop="reviewBody">"I was nervous about online learning, but the instructors at GECC are patient and supportive. They focus on real conversation skills which is exactly what I needed. My confidence in speaking English has improved dramatically!"</p>
+                    <div class="testimonial-author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                        <strong itemprop="name">Ji-won Lee</strong>
+                        <span itemprop="jobTitle">Student, South Korea</span>
+                    </div>
+                </article>
+                <article class="testimonial-card" itemscope itemtype="https://schema.org/Review">
+                    <div class="stars" role="img" aria-label="5 out of 5 stars">
+                        <span aria-hidden="true">★★★★★</span>
+                    </div>
+                    <p itemprop="reviewBody">"The personalized lessons and feedback from my GECC teacher have been invaluable. The curriculum is well-structured and my instructor really understands how Korean learners struggle with English. Best investment in my English learning!"</p>
+                    <div class="testimonial-author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                        <strong itemprop="name">Sung-ho Kim</strong>
+                        <span itemprop="jobTitle">Student, South Korea</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" aria-label="Call to action">
+        <div class="cta-container">
+            <h2>Ready to Begin Your Teaching Journey?</h2>
+            <p>Fresh graduates and experienced teachers welcome. Start making an impact with GECC today.</p>
+            <a href="#contact" class="btn btn-primary btn-large">Apply Today - Free & Easy</a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact" aria-label="Contact and application">
+        <div class="contact-container">
+            <div class="section-header">
+                <h2>Join Our Community of Inspiring Teachers</h2>
+                <p>Fresh graduates and experienced educators welcome. Apply in minutes. We respond within 48 hours.</p>
+            </div>
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <article class="contact-item">
+                        <h4 aria-hidden="true">📧</h4>
+                        <p><a href="mailto:globalenglish.recruits@gmail.com">globalenglish.recruits@gmail.com</a></p>
+                    </article>
+                    <article class="contact-item">
+                        <h4 aria-hidden="true">📱</h4>
+                        <p><a href="tel:+639198309467">+63 919 830 9467</a></p>
+                    </article>
+                    <article class="contact-item">
+                        <h4 aria-hidden="true">⏰</h4>
+                        <p>Monday - Friday: 1:00 PM - 10:00 PM (EST)</p>
+                    </article>
+                </div>
+                <form class="contact-form" id="applicationForm" novalidate>
+                    <div class="form-group">
+                        <label for="fullName">Full Name <span aria-label="required">*</span></label>
+                        <input type="text" id="fullName" name="fullName" required aria-required="true" autocomplete="name">
+                        <span id="fullName-error" class="error-message" role="alert"></span>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email Address <span aria-label="required">*</span></label>
+                            <input type="email" id="email" name="email" required aria-required="true" autocomplete="email">
+                            <span id="email-error" class="error-message" role="alert"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number <span aria-label="required">*</span></label>
+                            <input type="tel" id="phone" name="phone" required aria-required="true" autocomplete="tel">
+                            <span id="phone-error" class="error-message" role="alert"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="experience">Teaching Experience <span aria-label="required">*</span></label>
+                        <select id="experience" name="experience" required aria-required="true">
+                            <option value="">Select your experience level</option>
+                            <option value="0-1">Beginner (0-1 years)</option>
+                            <option value="1-3">Intermediate (1-3 years)</option>
+                            <option value="3-5">Experienced (3-5 years)</option>
+                            <option value="5+">Expert (5+ years)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="background">Tell Us About Your Teaching Background <span aria-label="required">*</span></label>
+                        <textarea id="background" name="background" placeholder="Share your experience, certifications, and why you're passionate about teaching..." required aria-required="true" minlength="50"></textarea>
+                        <span id="background-error" class="error-message" role="alert"></span>
+                    </div>
+                    <div class="form-group file-upload">
+                        <label for="resume" class="upload-label" role="button" tabindex="0">
+                            <span class="upload-icon" aria-hidden="true">📄</span>
+                            <span class="upload-text">Upload Your CV or Resume</span>
+                            <span class="upload-info">(PDF, DOC, DOCX - Max 10MB)</span>
+                        </label>
+                        <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required aria-required="true">
+                        <span id="resume-error" class="error-message" role="alert"></span>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" id="terms" name="terms" required aria-required="true">
+                        <label for="terms">I agree to GECC's terms of service and privacy policy</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-large">Submit My Application</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Social</h4>
+                    <ul>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Global English Call Center Inc. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
