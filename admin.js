@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Load applicants from server (MySQL)
 function loadApplicants() {
-    fetch('save-application-mysql.php')
+    fetch('/gecc/save-application-mysql.php')
         .then(response => response.json())
         .then(data => {
             if (data.success) {
@@ -248,7 +248,7 @@ function saveAndRefresh() {
     const fullName = currentApplicant.fullName;
     const email = currentApplicant.email;
 
-    fetch('save-application-mysql.php', {
+    fetch('/gecc/save-application-mysql.php', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -273,7 +273,7 @@ function saveAndRefresh() {
 
 // Send email notification
 function sendEmailNotification(status, fullName, email, reason = '') {
-    fetch('send-notification.php', {
+    fetch('/gecc/send-notification.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

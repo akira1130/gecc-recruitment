@@ -36,6 +36,9 @@ try {
 
     // Handle POST (submit application)
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        error_log("POST received with: " . json_encode($_POST));
+        error_log("FILES: " . json_encode($_FILES));
+        
         // Sanitize all POST data
         $_POST = sanitizeInput($_POST);
 
@@ -46,6 +49,8 @@ try {
         $experience = trim($_POST['experience'] ?? '');
         $background = trim($_POST['background'] ?? '');
         $terms = isset($_POST['terms']) ? 1 : 0;
+
+        error_log("Form data - Name: $fullName, Email: $email, Phone: $phone, Exp: $experience");
 
         // Validation rules
         if (empty($fullName) || strlen($fullName) < 2 || strlen($fullName) > 255) {
