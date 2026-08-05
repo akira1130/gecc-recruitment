@@ -77,8 +77,13 @@ document.addEventListener('DOMContentLoaded', function() {
             // Create FormData to send files and form data
             const formData = new FormData(form);
             
+            // Determine correct API path based on environment
+            const apiPath = window.location.hostname === 'localhost' 
+                ? '/gecc/save-application-mysql.php' 
+                : '/save-application-mysql.php';
+            
             // Submit to backend
-            fetch('/gecc/save-application-mysql.php', {
+            fetch(apiPath, {
                 method: 'POST',
                 body: formData
             })

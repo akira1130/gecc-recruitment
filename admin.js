@@ -16,7 +16,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Load applicants from server (MySQL)
 function loadApplicants() {
-    fetch('/gecc/save-application-mysql.php')
+    const apiPath = window.location.hostname === 'localhost' ? '/gecc/save-application-mysql.php' : '/save-application-mysql.php';
+    fetch(apiPath)
         .then(response => response.json())
         .then(data => {
             if (data.success) {
@@ -242,13 +243,14 @@ function closeAllModals() {
 
 // Save and refresh
 function saveAndRefresh() {
+    const apiPath = window.location.hostname === 'localhost' ? '/gecc/save-application-mysql.php' : '/save-application-mysql.php';
     const applicationId = currentApplicant.id;
     const status = currentApplicant.status;
     const rejectionReason = currentApplicant.rejectionReason || '';
     const fullName = currentApplicant.fullName;
     const email = currentApplicant.email;
 
-    fetch('/gecc/save-application-mysql.php', {
+    fetch(apiPath, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -273,7 +275,8 @@ function saveAndRefresh() {
 
 // Send email notification
 function sendEmailNotification(status, fullName, email, reason = '') {
-    fetch('/gecc/send-notification.php', {
+    const apiPath = window.location.hostname === 'localhost' ? '/gecc/send-notification.php' : '/send-notification.php';
+    fetch(apiPath, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
