@@ -74,14 +74,33 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            alert('Thank you for your application! We will review your CV and contact you soon.');
-            form.reset();
-            uploadLabel.innerHTML = `
-                <span class="upload-text">Upload CV or Resume</span>
-                <span class="upload-info">(PDF, DOC, DOCX)</span>
-            `;
-            uploadLabel.style.borderColor = '';
-            uploadLabel.style.background = '';
+            // Create FormData to send files and form data
+            const formData = new FormData(form);
+            
+            // Submit to backend
+            fetch('/save-application-mysql.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Thank you for your application! We will review your CV and contact you soon.');
+                    form.reset();
+                    uploadLabel.innerHTML = `
+                        <span class="upload-text">Upload CV or Resume</span>
+                        <span class="upload-info">(PDF, DOC, DOCX)</span>
+                    `;
+                    uploadLabel.style.borderColor = '';
+                    uploadLabel.style.background = '';
+                } else {
+                    alert('Error: ' + (data.message || 'Failed to submit application'));
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error submitting application. Please try again.');
+            });
         });
     }
 
