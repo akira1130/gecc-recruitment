@@ -1,0 +1,8 @@
+[phases.setup]
+nixpkgs = ["php82", "php82Extensions.mysqli", "php82Extensions.pdo", "php82Extensions.curl"]
+
+[phases.build]
+cmds = ["composer install --no-dev"]
+
+[start]
+cmd = "php -S 0.0.0.0:$PORT -t ."
