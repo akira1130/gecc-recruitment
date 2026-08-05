@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Form handling
-    const form = document.querySelector('.application-form');
+    const form = document.querySelector('#applicationForm');
     if (form) {
         const fileInput = form.querySelector('input[type="file"]');
         const uploadLabel = form.querySelector('.upload-label');
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const formData = new FormData(form);
             
             // Submit to backend
-            fetch('/save-application-mysql.php', {
+            fetch('/gecc/save-application-mysql.php', {
                 method: 'POST',
                 body: formData
             })
