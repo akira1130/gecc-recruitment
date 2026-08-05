@@ -1,15 +1,34 @@
 <?php
 /**
  * GECC - Database Configuration
- * Infinity Free Hosting Version
+ * Supports Railway and Local Development
  */
 
-// ===== INFINITY FREE HOSTING CREDENTIALS =====
-define('DB_HOST', 'sql200.infinityfree.com');
-define('DB_USER', 'if0_42363894');
-define('DB_PASS', 'cR3R3MxdIApDq2');
-define('DB_NAME', 'if0_42363894_gecc');
-define('DB_PORT', 3306);
+// Load environment variables if .env exists (local development)
+$envFile = __DIR__ . '/.env';
+if (file_exists($envFile)) {
+    $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        if (strpos(trim($line), '#') === 0 || strpos($line, '=') === false) continue;
+        list($key, $value) = explode('=', $line, 2);
+        $key = trim($key);
+        $value = trim($value);
+        if ((strpos($value, '"') === 0 && strrpos($value, '"') === strlen($value) - 1) ||
+            (strpos($value, "'") === 0 && strrpos($value, "'") === strlen($value) - 1)) {
+            $value = substr($value, 1, -1);
+        }
+        if (!empty($key) && !getenv($key)) {
+            putenv("{$key}={$value}");
+        }
+    }
+}
+
+// Database credentials (Railway environment variables or local .env)
+define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
+define('DB_USER', getenv('DB_USER') ?: 'root');
+define('DB_PASS', getenv('DB_PASS') ?: '');
+define('DB_NAME', getenv('DB_NAME') ?: 'gecc_db');
+define('DB_PORT', (int)(getenv('DB_PORT') ?: 3306));
 define('DB_CHARSET', 'utf8mb4');
 
 // Error reporting
@@ -35,7 +54,7 @@ if ($conn->connect_error) {
     error_log('Database connection failed: ' . $conn->connect_error);
     die(json_encode([
         'success' => false,
-        'message' => 'Database connection failed. Please check your credentials.'
+        'message' => 'Database connection failed: ' . $conn->connect_error
     ]));
 }
 
