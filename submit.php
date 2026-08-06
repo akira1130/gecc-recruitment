@@ -3,6 +3,9 @@ header('Content-Type: application/json');
 error_reporting(E_ALL);
 ini_set('display_errors', 0);
 
+// Log all requests
+error_log("Submit.php called. Method: " . $_SERVER['REQUEST_METHOD']);
+
 try {
     // Use SQLite - no connection issues
     $dbFile = __DIR__ . '/data/applications.db';
@@ -10,8 +13,10 @@ try {
     // Create data directory if needed
     if (!is_dir(__DIR__ . '/data')) {
         @mkdir(__DIR__ . '/data', 0755, true);
+        error_log("Created data directory");
     }
 
+    error_log("Connecting to SQLite: " . $dbFile);
     $db = new PDO('sqlite:' . $dbFile);
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
