@@ -22,12 +22,20 @@ set_error_handler(function ($errno, $errstr) {
 });
 
 try {
-    // Include config
-    require_once 'config.php';
+    // Include config with absolute path
+    $configFile = __DIR__ . '/config.php';
+    if (!file_exists($configFile)) {
+        throw new Exception('Config file not found at: ' . $configFile);
+    }
+    require_once $configFile;
+    
+    error_log("Config loaded successfully");
     
     if (!isset($conn) || $conn->connect_error) {
         throw new Exception('Database connection failed: ' . ($conn->connect_error ?? 'Unknown error'));
     }
+    
+    error_log("Database connected successfully");
 
     // Create uploads directory
     $uploadsDir = __DIR__ . '/uploads/resumes/';
