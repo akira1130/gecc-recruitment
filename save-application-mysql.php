@@ -31,17 +31,7 @@ try {
 
     // Create uploads directory
     $uploadsDir = __DIR__ . '/uploads/resumes/';
-    if (!is_dir($uploadsDir)) {
-        if (!@mkdir($uploadsDir, 0755, true)) {
-            error_log('Warning: Failed to create uploads directory at ' . $uploadsDir);
-            // Continue anyway - file might be writable in parent directory
-        }
-    }
-    
-    // Verify uploads directory is writable
-    if (is_dir($uploadsDir) && !is_writable($uploadsDir)) {
-        error_log('Warning: Uploads directory is not writable: ' . $uploadsDir);
-    }
+    // Note: Files are now stored in database, not on filesystem
 
     // Handle POST (submit application)
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -87,7 +77,7 @@ try {
             throw new Exception('You must agree to the terms of service');
         }
 
-        // Handle file upload
+        // Handle file upload - store in database
         if (!isset($_FILES['resume'])) {
             throw new Exception('No file uploaded');
         }
@@ -128,30 +118,17 @@ try {
             throw new Exception('Invalid file extension');
         }
 
-        // Generate safe filename
-        $fileName = preg_replace('/[^a-zA-Z0-9_\-]/', '_', $email) . '_' . time() . '.' . $ext;
-        $filePath = $uploadsDir . $fileName;
-
-        // Move file
-        if (!move_uploaded_file($file['tmp_name'], $filePath)) {
-            error_log('Failed to move file from ' . $file['tmp_name'] . ' to ' . $filePath);
-            error_log('Uploads dir exists: ' . (is_dir($uploadsDir) ? 'yes' : 'no'));
-            error_log('Uploads dir writable: ' . (is_writable($uploadsDir) ? 'yes' : 'no'));
-            throw new Exception('Failed to save file. Server storage issue.');
+        // Read file content for database storage
+        $resumeData = file_get_contents($file['tmp_name']);
+        if ($resumeData === false) {
+            throw new Exception('Failed to read uploaded file');
         }
 
-        // Verify file was saved
-        if (!file_exists($filePath) || !is_readable($filePath)) {
-            @unlink($filePath);
-            throw new Exception('File verification failed');
-        }
-
-        $resumePath = 'uploads/resumes/' . $fileName;
+        $resumeFileName = $file['name'];
 
         // Check for duplicate email
         $stmt = $conn->prepare("SELECT id FROM applications WHERE email = ?");
         if (!$stmt) {
-            @unlink($filePath);
             throw new Exception('Database error');
         }
 
@@ -160,27 +137,24 @@ try {
 
         if ($stmt->get_result()->num_rows > 0) {
             $stmt->close();
-            @unlink($filePath);
             throw new Exception('An application with this email already exists');
         }
         $stmt->close();
 
-        // Insert application
+        // Insert application with file data stored in database
         $stmt = $conn->prepare(
-            "INSERT INTO applications (fullName, email, phone, experience, background, resume, terms) 
-             VALUES (?, ?, ?, ?, ?, ?, ?)"
+            "INSERT INTO applications (fullName, email, phone, experience, background, resumeFileName, resumeData, resumeMimeType, terms) 
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
         );
 
         if (!$stmt) {
-            @unlink($filePath);
             throw new Exception('Database error');
         }
 
-        $stmt->bind_param("ssssssi", $fullName, $email, $phone, $experience, $background, $resumePath, $terms);
+        $stmt->bind_param("ssssssssi", $fullName, $email, $phone, $experience, $background, $resumeFileName, $resumeData, $mimeType, $terms);
 
         if (!$stmt->execute()) {
             $stmt->close();
-            @unlink($filePath);
             throw new Exception('Failed to save application');
         }
 
