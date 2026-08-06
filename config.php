@@ -26,11 +26,11 @@ if (file_exists($envFile)) {
 }
 
 // Database credentials (Railway environment variables or local .env)
-define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
-define('DB_USER', getenv('DB_USER') ?: 'root');
-define('DB_PASS', getenv('DB_PASS') ?: '');
-define('DB_NAME', getenv('DB_NAME') ?: 'gecc_db');
-define('DB_PORT', (int)(getenv('DB_PORT') ?: 3306));
+define('DB_HOST', getenv('DATABASE_URL') ? parse_url(getenv('DATABASE_URL'), PHP_URL_HOST) : (getenv('DB_HOST') ?: 'localhost'));
+define('DB_USER', getenv('DATABASE_URL') ? parse_url(getenv('DATABASE_URL'), PHP_URL_USER) : (getenv('DB_USER') ?: 'root'));
+define('DB_PASS', getenv('DATABASE_URL') ? parse_url(getenv('DATABASE_URL'), PHP_URL_PASS) : (getenv('DB_PASS') ?: ''));
+define('DB_NAME', getenv('DATABASE_URL') ? parse_url(getenv('DATABASE_URL'), PHP_URL_PATH) : (getenv('DB_NAME') ?: 'railway'));
+define('DB_PORT', (int)(getenv('DATABASE_URL') ? parse_url(getenv('DATABASE_URL'), PHP_URL_PORT) : (getenv('DB_PORT') ?: 3306)));
 define('DB_CHARSET', 'utf8mb4');
 
 // Error reporting

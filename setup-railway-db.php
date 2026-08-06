@@ -29,14 +29,27 @@ try {
         }
     }
 
-    // Get database credentials from environment (Railway or local)
-    $host = getenv('MYSQL_HOST') ?: getenv('DB_HOST') ?: 'localhost';
-    $user = getenv('MYSQL_USER') ?: getenv('DB_USER') ?: 'root';
-    $pass = getenv('MYSQL_PASSWORD') ?: getenv('DB_PASS') ?: '';
-    $port = (int)(getenv('MYSQL_PORT') ?: getenv('DB_PORT') ?: 3306);
-    $dbname = getenv('MYSQL_DB_NAME') ?: getenv('DB_NAME') ?: 'gecc_db';
+    // Get database credentials from environment (Railway uses DATABASE_URL)
+    $databaseUrl = getenv('DATABASE_URL');
+    
+    if ($databaseUrl) {
+        // Parse DATABASE_URL (format: mysql://user:pass@host:port/dbname)
+        $parsed = parse_url($databaseUrl);
+        $host = $parsed['host'] ?? 'localhost';
+        $user = $parsed['user'] ?? 'root';
+        $pass = $parsed['pass'] ?? '';
+        $port = $parsed['port'] ?? 3306;
+        $dbname = ltrim($parsed['path'] ?? '/railway', '/');
+    } else {
+        // Fallback to individual variables or .env
+        $host = getenv('DB_HOST') ?: 'localhost';
+        $user = getenv('DB_USER') ?: 'root';
+        $pass = getenv('DB_PASS') ?: '';
+        $port = (int)(getenv('DB_PORT') ?: 3306);
+        $dbname = getenv('DB_NAME') ?: 'railway';
+    }
 
-    error_log("Setup: Attempting connection to $host:$port");
+    error_log("Setup: Attempting connection to $host:$port database: $dbname");
 
     // Create connection
     $conn = new mysqli($host, $user, $pass, $dbname, $port);
