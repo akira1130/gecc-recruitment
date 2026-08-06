@@ -24,6 +24,10 @@ set_error_handler(function ($errno, $errstr) {
 try {
     // Include config
     require_once 'config.php';
+    
+    if (!isset($conn) || $conn->connect_error) {
+        throw new Exception('Database connection failed: ' . ($conn->connect_error ?? 'Unknown error'));
+    }
 
     // Create uploads directory
     $uploadsDir = __DIR__ . '/uploads/resumes/';
@@ -36,8 +40,9 @@ try {
 
     // Handle POST (submit application)
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        error_log("POST received with: " . json_encode($_POST));
-        error_log("FILES: " . json_encode($_FILES));
+        error_log("POST received. Content-Type: " . ($_SERVER['CONTENT_TYPE'] ?? 'not set'));
+        error_log("POST data: " . json_encode($_POST));
+        error_log("FILES: " . json_encode(array_keys($_FILES)));
         
         // Sanitize all POST data
         $_POST = sanitizeInput($_POST);

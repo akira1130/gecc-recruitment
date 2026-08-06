@@ -78,17 +78,32 @@ document.addEventListener('DOMContentLoaded', function() {
             const formData = new FormData(form);
             
             // Determine correct API path based on environment
-            const apiPath = window.location.hostname === 'localhost' 
-                ? '/gecc/save-application-mysql.php' 
-                : '/save-application-mysql.php';
+            let apiPath;
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                apiPath = '/gecc/save-application-mysql.php';
+            } else {
+                // On Railway, use the full protocol and host
+                apiPath = window.location.protocol + '//' + window.location.host + '/save-application-mysql.php';
+            }
+            
+            console.log('Form submission to:', apiPath);
             
             // Submit to backend
             fetch(apiPath, {
                 method: 'POST',
                 body: formData
             })
-            .then(response => response.json())
+            .then(response => {
+                console.log('Response status:', response.status);
+                if (!response.ok) {
+                    return response.text().then(text => {
+                        throw new Error(`HTTP ${response.status}: ${text}`);
+                    });
+                }
+                return response.json();
+            })
             .then(data => {
+                console.log('Response data:', data);
                 if (data.success) {
                     alert('Thank you for your application! We will review your CV and contact you soon.');
                     form.reset();
@@ -104,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('Error submitting application. Please try again.');
+                alert('Error submitting application: ' + error.message);
             });
         });
     }
