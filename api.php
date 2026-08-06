@@ -45,12 +45,10 @@ try {
 
     $conn->query($sql);
 
-    // Route handling
+    // Route handling - just handle POST
     $method = $_SERVER['REQUEST_METHOD'];
-    $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-    $path = str_replace('/api', '', $path);
 
-    if ($method === 'POST' && ($path === '' || $path === '/apply')) {
+    if ($method === 'POST') {
         // Validate form data
         $fullName = trim($_POST['fullName'] ?? '');
         $email = trim($_POST['email'] ?? '');
@@ -153,24 +151,9 @@ try {
             'applicationId' => $appId
         ]);
 
-    } elseif ($method === 'GET' && $path === '/applications') {
-        // Get all applications
-        $result = $conn->query("SELECT id, fullName, email, phone, experience, status, appliedAt FROM applications ORDER BY appliedAt DESC");
-        
-        $applications = [];
-        while ($row = $result->fetch_assoc()) {
-            $applications[] = $row;
-        }
-
-        http_response_code(200);
-        echo json_encode([
-            'success' => true,
-            'applications' => $applications
-        ]);
-
     } else {
-        http_response_code(404);
-        echo json_encode(['success' => false, 'message' => 'Not found']);
+        http_response_code(405);
+        echo json_encode(['success' => false, 'message' => 'Method not allowed']);
     }
 
     $conn->close();
