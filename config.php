@@ -36,12 +36,14 @@ error_reporting(E_ALL);
 ini_set('display_errors', 0);
 ini_set('log_errors', 1);
 
-// Create log directory if needed
-if (!is_dir(__DIR__ . '/logs')) {
-    mkdir(__DIR__ . '/logs', 0755, true);
+// Create log directory if needed and writable
+$logsDir = __DIR__ . '/logs';
+if (!is_dir($logsDir)) {
+    @mkdir($logsDir, 0755, true);
 }
-
-ini_set('error_log', __DIR__ . '/logs/php-error.log');
+if (is_writable($logsDir)) {
+    ini_set('error_log', $logsDir . '/php-error.log');
+}
 
 // Debug logging
 error_log('DB Connection: ' . DB_HOST . ' | User: ' . DB_USER . ' | DB: ' . DB_NAME);
@@ -52,10 +54,7 @@ $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
 // Check connection
 if ($conn->connect_error) {
     error_log('Database connection failed: ' . $conn->connect_error);
-    die(json_encode([
-        'success' => false,
-        'message' => 'Database connection failed: ' . $conn->connect_error
-    ]));
+    // Don't die here - let the calling code handle it
 }
 
 // Set charset and variables

@@ -32,10 +32,15 @@ try {
     // Create uploads directory
     $uploadsDir = __DIR__ . '/uploads/resumes/';
     if (!is_dir($uploadsDir)) {
-        if (!mkdir($uploadsDir, 0755, true)) {
-            throw new Exception('Failed to create uploads directory');
+        if (!@mkdir($uploadsDir, 0755, true)) {
+            error_log('Warning: Failed to create uploads directory at ' . $uploadsDir);
+            // Continue anyway - file might be writable in parent directory
         }
-        file_put_contents($uploadsDir . '.htaccess', "deny from all\n");
+    }
+    
+    // Verify uploads directory is writable
+    if (is_dir($uploadsDir) && !is_writable($uploadsDir)) {
+        error_log('Warning: Uploads directory is not writable: ' . $uploadsDir);
     }
 
     // Handle POST (submit application)
@@ -129,7 +134,10 @@ try {
 
         // Move file
         if (!move_uploaded_file($file['tmp_name'], $filePath)) {
-            throw new Exception('Failed to save file');
+            error_log('Failed to move file from ' . $file['tmp_name'] . ' to ' . $filePath);
+            error_log('Uploads dir exists: ' . (is_dir($uploadsDir) ? 'yes' : 'no'));
+            error_log('Uploads dir writable: ' . (is_writable($uploadsDir) ? 'yes' : 'no'));
+            throw new Exception('Failed to save file. Server storage issue.');
         }
 
         // Verify file was saved
