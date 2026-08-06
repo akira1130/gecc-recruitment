@@ -10,19 +10,23 @@ ini_set('display_errors', 0);
 
 try {
     // Get database credentials from environment
-    $host = $_ENV['DB_HOST'] ?? 'localhost';
-    $user = $_ENV['DB_USER'] ?? 'root';
-    $pass = $_ENV['DB_PASS'] ?? '';
-    $port = (int)($_ENV['DB_PORT'] ?? 3306);
-    $dbname = $_ENV['DB_NAME'] ?? 'railway';
+    // Try multiple methods since $_ENV doesn't always work on Railway
+    $host = $_ENV['DB_HOST'] ?? $_SERVER['DB_HOST'] ?? getenv('DB_HOST') ?? 'localhost';
+    $user = $_ENV['DB_USER'] ?? $_SERVER['DB_USER'] ?? getenv('DB_USER') ?? 'root';
+    $pass = $_ENV['DB_PASS'] ?? $_SERVER['DB_PASS'] ?? getenv('DB_PASS') ?? '';
+    $port = (int)($_ENV['DB_PORT'] ?? $_SERVER['DB_PORT'] ?? getenv('DB_PORT') ?? 3306);
+    $dbname = $_ENV['DB_NAME'] ?? $_SERVER['DB_NAME'] ?? getenv('DB_NAME') ?? 'railway';
+
+    error_log("API: Connecting to $host:$port db=$dbname user=$user");
 
     // Connect to database
     $conn = new mysqli($host, $user, $pass, $dbname, $port);
 
     if ($conn->connect_error) {
-        throw new Exception('Database connection failed: ' . $conn->connect_error);
+        throw new Exception('DB connection failed: ' . $conn->connect_error);
     }
 
+    error_log("API: Connected successfully");
     $conn->set_charset('utf8mb4');
 
     // Ensure table exists
